@@ -41,11 +41,12 @@ while not fin_compras:
     print(f"🤑 Importe total: {cliente.cart.total_amount()}")
 
     print("😭 ¿Quieres finalizar las compras? (sí/no)")
-    fin_compras = input() == "sí"
+    fin_compras = input() == "si"
 
 print("💸 ¿Quieres confirmar la compra? (sí/no)")
-if input() == "sí":
-    cliente.cart.check_out()
+if input() == "si":
+    vendedor.wallet.deposit(cliente.cart.total_amount())
+    
 
 print("୨୧┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈Resultado┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈୨୧")
 print(f"🛍️ Posesiones de {cliente.name}")

@@ -25,12 +25,18 @@ class Cart(Ownable):
             print("Saldo insuficiente en la billetera del propietario del carrito.")
             return
         
+        total = self.total_amount()
         for item in self.items:
             item.owner.wallet.deposit(item.price)  # Transfiere el precio del artículo a la billetera del propietario del artículo
             item.owner = self.owner  # Transfiere la propiedad del artículo al propietario del carrito
+
+        # Deduce el monto total de la billetera del comprador
+        self.owner.wallet.withdraw(total)
+        
+        # Deposita el monto total en la billetera del vendedor
+        for item in self.items:
+            item.owner.wallet.deposit(item.price)
         
         self.items = []  # Vacía el carrito después de la compra
 
         print("Compra realizada exitosamente.")
-
-    # Resto del código de la clase Cart...
